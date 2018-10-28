@@ -51,18 +51,18 @@ class MainActivity : Activity() {
 
         preview = CameraPreview(surfaceView, width, height,
             Camera.PreviewCallback { data, camera ->
-                val frame = frameConverter.convert(data, width, height)
+                val frame = frameConverter.convert(data, width, height)              //
+                                                                                     //
+                val image = converter.convertToMat(frame)                            //  Here we process the image and make it an array of grayscale values
+                                                                                     //
+                cvtColor(image, gray, COLOR_BGR2GRAY)                                //
 
-                val image = converter.convertToMat(frame)
-
-                cvtColor(image, gray, COLOR_BGR2GRAY)
-
-                threshold(gray, thresh, 127.0, 255.0, THRESH_BINARY)
-
-                contours.clear()
-                findContours(thresh, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE)
-
-                drawContours(image, contours, -1, Scalar(0.0, 255.0, 255.0, 255.0))
+                threshold(gray, thresh, 127.0, 255.0, THRESH_BINARY)                 //
+                                                                                     //
+                contours.clear()                                                     //  Here we draw the contours based on the differences of the greyscale values
+                findContours(thresh, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE)   //  We then Convert the image back to a bitmap and output it in the imageview(see activity_main.xml)
+                                                                                     //
+                drawContours(image, contours, -1, Scalar(0.0, 255.0, 255.0, 255.0))  //
 
                 val bitmap = frameConverter.convert(frame)
                 imageView.setImageBitmap(bitmap)
