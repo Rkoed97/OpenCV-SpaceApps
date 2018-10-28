@@ -1,4 +1,4 @@
-package ro.cnmv.qube.opencv
+package ro.spaceapps.team.penteract //Fill in your needed package name
 
 import android.Manifest
 import android.app.Activity
@@ -22,6 +22,8 @@ import org.bytedeco.javacpp.Loader.sizeof
 import org.bytedeco.javacpp.helper.opencv_imgproc.cvFindContours
 import org.bytedeco.javacpp.opencv_core.*
 import org.bytedeco.javacpp.opencv_imgproc.*
+
+//You might find unnecessary imports, they are there from our tests
 
 
 class MainActivity : Activity() {
